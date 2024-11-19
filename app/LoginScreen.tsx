@@ -1,9 +1,9 @@
 import React from "react"
 import { useState } from "react";
-import { View, Text, Image, StyleSheet, TextInput, TouchableWithoutFeedback, TouchableOpacity, Keyboard, Dimensions } from "react-native";
+import { View, Button, Text, Image, StyleSheet, TextInput, TouchableWithoutFeedback, TouchableOpacity, Keyboard, Dimensions } from "react-native";
 import "../global.css"
 
-export default function App() {
+export default function App({ navigation }: { navigation: any }) {
 
   const [{ width, height }, setSize] = useState({ width: 0, height: 0 });
   const handleTapOutside = () => {
@@ -27,17 +27,17 @@ export default function App() {
         numberOfLines={1}>
         Login
       </Text>
-          <TextInput
-            style={styles.textbox}
-            placeholder="email"
-            inputMode="email"
-            keyboardType="default"
-          />
-          <TextInput
-            style={styles.textbox}
-            placeholder="password"
-            keyboardType="default"
-          />
+      <TextInput
+        style={styles.textbox}
+        placeholder="email"
+        inputMode="email"
+        keyboardType="default"
+      />
+      <TextInput
+        style={styles.textbox}
+        placeholder="password"
+        keyboardType="default"
+      />
 
       {/*}<View className="flex-1 bg-gray-200 justify-center items-center">
           <Text className="text-lg font-bold text-blue-500">Hello NativeWind!</Text>
@@ -54,15 +54,13 @@ export default function App() {
         </TouchableOpacity>
       </View>
 
-      <TouchableOpacity
-        style={styles.loginButtons}
-      >
 
-        <Text>
-          Login
-        </Text>
-      </TouchableOpacity>
-
+      <Button
+        title="Go to Profile"
+        onPress={() =>
+          navigation.navigate("Home", { name: "Jane" })
+        }
+      />
       <TouchableOpacity
         style={styles.buttons}
       >
