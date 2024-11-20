@@ -9,24 +9,22 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     // Only one NavigationContainer at the root of the app
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen
         name="Login"
         component={LoginScreen}
-      options={{
-        title: 'Login',
-        headerLeft: () => null,
-      }}
-          
-        />
+        options={{
+          headerLeft: () => null,
+          headerShown: false,
+          animation: "none"
+        }}
+      />
       <Stack.Screen
         name="Home"
         component={HomeScreen}
-        options={{
-          title: 'MyScreen', // Custom title
-          headerLeft: () => null, // Removes the back button
+        options={{ 
           headerShown: false,
-          animation: 'none'
+          animation: "none"
         }}
       />
     </Stack.Navigator>

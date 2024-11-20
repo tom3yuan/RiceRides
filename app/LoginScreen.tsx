@@ -58,7 +58,7 @@ export default function App({ navigation }: { navigation: any }) {
       <Button
         title="Go to Profile"
         onPress={() =>
-          navigation.navigate("Home", { name: "Jane" })
+          navigation.navigate("Home", { name: "Home" })
         }
       />
       <TouchableOpacity
