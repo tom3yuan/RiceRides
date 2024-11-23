@@ -16,7 +16,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.anonymous.ricerides"
     },
     "web": {
       "bundler": "metro",
@@ -33,7 +34,8 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
-      ]
+      ],
+      ["@react-native-google-signin/google-signin"]
     ],
     "experiments": {
       "typedRoutes": true

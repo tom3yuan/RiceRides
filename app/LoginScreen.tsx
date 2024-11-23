@@ -3,13 +3,51 @@ import { useState } from "react";
 import { View, Button, Text, Image, StyleSheet, TextInput, TouchableWithoutFeedback, TouchableOpacity, Keyboard, Dimensions } from "react-native";
 import "../global.css"
 
+import {
+  GoogleSignin,
+  statusCodes,
+} from '@react-native-google-signin/google-signin'
+
+GoogleSignin.configure();
+
 export default function App({ navigation }: { navigation: any }) {
 
   const [{ width, height }, setSize] = useState({ width: 0, height: 0 });
+  const [userInfo, setUserInfo] = useState(null);
   const handleTapOutside = () => {
     Keyboard.dismiss()
   }
 
+  const isSuccessResponse = (response) => response && response.data;
+  const isErrorWithCode = (error) => error && error.code;
+  /*
+  const signIn = async () => {
+    try {
+      await GoogleSignin.hasPlayServices();
+      const response = await GoogleSignin.signIn();
+      if (isSuccessResponse(response)) {
+        setUserInfo({ userInfo: response.data });
+      } else {
+        // sign in was cancelled by user
+      }
+    } catch (error) {
+      if (isErrorWithCode(error)) {
+        switch (error.code) {
+          case statusCodes.IN_PROGRESS:
+            // operation (eg. sign in) already in progress
+            break;
+          case statusCodes.PLAY_SERVICES_NOT_AVAILABLE:
+            // Android only, play services not available or outdated
+            break;
+          default:
+          // some other error happened
+        }
+      } else {
+        // an error that's not related to google sign in occurred
+      }
+    }
+  };
+  */
   return (
     <View style={styles.container}>
 
@@ -60,7 +98,10 @@ export default function App({ navigation }: { navigation: any }) {
         onPress={() =>
           navigation.navigate("Home", { name: "Home" })
         }
-      />
+      /><Button
+      title="login"
+      onPress={signIn}
+    />
       <TouchableOpacity
         style={styles.buttons}
       >
