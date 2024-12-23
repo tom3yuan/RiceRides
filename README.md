@@ -51,6 +51,8 @@ Join our community of developers creating universal apps.
 
 
 Comments by Tom:
-Relevant documentations:
-https://www.npmjs.com/package/react-native-maps
-https://react-native-google-signin.github.io/docs/install
+- Relevant documentations:
+- https://www.npmjs.com/package/react-native-maps
+- https://react-native-google-signin.github.io/docs/install
+- To commit in vscode:
+- :wq
