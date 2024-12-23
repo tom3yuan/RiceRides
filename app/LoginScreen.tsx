@@ -19,13 +19,19 @@ export default function App({ navigation }: { navigation: any }) {
   const handleTapOutside = () => {
     Keyboard.dismiss()
   }
+  const check = async () => {
+    console.log(GoogleSignin.getCurrentUser())
+  }
 
   const signIn = async () => {
     try {
       await GoogleSignin.hasPlayServices();
       const response = await GoogleSignin.signIn();
       if (isSuccessResponse(response)) {
-        setState({ userInfo: response.data });
+        setUserInfo(response);
+        console.log("teemov")
+        console.log(userInfo.data?.user.email)
+        console.log(GoogleSignin.getCurrentUser())
       } else {
         // sign in was cancelled by user
       }
@@ -49,34 +55,6 @@ export default function App({ navigation }: { navigation: any }) {
 
   const isSuccessResponse = (response) => response && response.data;
   const isErrorWithCode = (error) => error && error.code;
-  /*
-  const signIn = async () => {
-    try {
-      await GoogleSignin.hasPlayServices();
-      const response = await GoogleSignin.signIn();
-      if (isSuccessResponse(response)) {
-        setUserInfo({ userInfo: response.data });
-      } else {
-        // sign in was cancelled by user
-      }
-    } catch (error) {
-      if (isErrorWithCode(error)) {
-        switch (error.code) {
-          case statusCodes.IN_PROGRESS:
-            // operation (eg. sign in) already in progress
-            break;
-          case statusCodes.PLAY_SERVICES_NOT_AVAILABLE:
-            // Android only, play services not available or outdated
-            break;
-          default:
-          // some other error happened
-        }
-      } else {
-        // an error that's not related to google sign in occurred
-      }
-    }
-  };
-  */
   return (
     <View style={styles.container}>
 
@@ -132,13 +110,10 @@ export default function App({ navigation }: { navigation: any }) {
         title="login"
         onPress={signIn}
       />
-      <TouchableOpacity
-        style={styles.buttons}
-      >
-        <Text>
-          Sign Up
-        </Text>
-      </TouchableOpacity>
+      <Button
+        title="check current"
+        onPress={check}
+      />
     </View>
   );
 }
