@@ -7,6 +7,8 @@ import {
   GoogleSignin,
   statusCodes,
 } from '@react-native-google-signin/google-signin'
+import Geolocation from '@react-native-community/geolocation';
+
 
 GoogleSignin.configure();
 
@@ -19,7 +21,10 @@ export default function App({ navigation }: { navigation: any }) {
   const handleTapOutside = () => {
     Keyboard.dismiss()
   }
+  
   const check = async () => {
+    Geolocation.requestAuthorization()
+    Geolocation.getCurrentPosition(info => console.log(info));
     console.log(GoogleSignin.getCurrentUser())
   }
 

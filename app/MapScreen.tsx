@@ -5,6 +5,7 @@ import {
     statusCodes,
 } from '@react-native-google-signin/google-signin'
 import MapView from 'react-native-maps';
+import Geolocation from '@react-native-community/geolocation';
 
 export default function MapScreen({ navigation }: { navigation: any }) {
 
@@ -13,16 +14,16 @@ export default function MapScreen({ navigation }: { navigation: any }) {
     }
     return (
         <View style={styles.container}>
-      <MapView
-        style={styles.map}
-        initialRegion={{
-          latitude: 37.78825,
-          longitude: -122.4324,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-      />
-    </View>
+            <MapView
+                style={styles.map}
+                initialRegion={{
+                    latitude: 7.78825,
+                    longitude: -2.4324,
+                    latitudeDelta: 0.0922,
+                    longitudeDelta: 0.0421,
+                }}
+            />
+        </View>
 
     );
 };
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',    // Centers map horizontally
     },
     map: {
-        width: '90%', // Adjust as needed
-        height: '90%',
+        width: '30%', // Adjust as needed
+        height: '30%',
     },
 })

@@ -4,14 +4,29 @@ import {
     GoogleSignin,
     statusCodes,
 } from '@react-native-google-signin/google-signin'
+import Geolocation from '@react-native-community/geolocation';
 
 import MapView from 'react-native-maps';
 
-const HomeScreen = ({ navigation }: { navigation: any }) => {
 
+let currentPosition;
+Geolocation.getCurrentPosition(
+    (info) => {
+      currentPosition = info;
+      console.log("Current Position:", currentPosition);
+    },
+    (error) => {
+      console.error("Error getting position:", error);
+    }
+  );
+  
+
+
+const HomeScreen = ({ navigation }: { navigation: any }) => {
     const check = async () => {
         console.log(GoogleSignin.getCurrentUser())
     }
+    
     return (
     <View style={styles.container}>
         <View className="absolute top-16 left-10 m-4 justify-center">
@@ -20,8 +35,8 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
         <MapView
             style={styles.map}
             initialRegion={{
-                latitude: 37.78825,
-                longitude: -122.4324,
+                latitude: currentPosition.coords.latitude,
+                longitude: currentPosition.coords.longitude,
                 latitudeDelta: 0.0922,
                 longitudeDelta: 0.0421,
             }}
