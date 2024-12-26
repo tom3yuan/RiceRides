@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',    // Centers map horizontally
     },
     map: {
-        width: '30%', // Adjust as needed
-        height: '30%',
+        width: '90%', // Adjust as needed
+        height: '90%',
     },
 })

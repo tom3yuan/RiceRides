@@ -12,36 +12,53 @@ import MapView from 'react-native-maps';
 let currentPosition;
 Geolocation.getCurrentPosition(
     (info) => {
-      currentPosition = info;
-      console.log("Current Position:", currentPosition);
+        currentPosition = info;
+        console.log("Current Position:", currentPosition);
     },
     (error) => {
-      console.error("Error getting position:", error);
+        console.error("Error getting position:", error);
     }
-  );
-  
+);
+
 
 
 const HomeScreen = ({ navigation }: { navigation: any }) => {
     const check = async () => {
         console.log(GoogleSignin.getCurrentUser())
     }
-    
+    const update = () => {
+        Geolocation.getCurrentPosition(
+            (info) => {
+                currentPosition = info;
+                console.log("Current Position:", currentPosition);
+            },
+            (error) => {
+                console.error("Error getting position:", error);
+            }
+        );
+    }
+
     return (
-    <View style={styles.container}>
-        <View className="absolute top-16 left-10 m-4 justify-center">
+        <View style={styles.container}>
+            <View className="absolute top-16 left-10 m-4 justify-center">
                 <Text className="text-4xl text-lg font-bold">Welcome Back!</Text>
+            </View>
+            <MapView
+                style={styles.map}
+                initialRegion={{
+                    latitude: currentPosition.coords.latitude,
+                    longitude: currentPosition.coords.longitude,
+                    latitudeDelta: 0.0922,
+                    longitudeDelta: 0.0421,
+                }}
+                showsUserLocation = {true}
+                followsUserLocation = {true}
+            />
+            <Button
+                title="check current"
+                onPress={update}
+            />
         </View>
-        <MapView
-            style={styles.map}
-            initialRegion={{
-                latitude: currentPosition.coords.latitude,
-                longitude: currentPosition.coords.longitude,
-                latitudeDelta: 0.0922,
-                longitudeDelta: 0.0421,
-            }}
-        />
-    </View>
     );
 };
 const styles = StyleSheet.create({
