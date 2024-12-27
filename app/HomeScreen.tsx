@@ -52,7 +52,6 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
                     longitudeDelta: 0.0421,
                 }}
                 showsUserLocation = {true}
-                followsUserLocation = {true}
             />
             <Button
                 title="check current"
