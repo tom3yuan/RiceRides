@@ -56,3 +56,4 @@ Comments by Tom:
 - https://react-native-google-signin.github.io/docs/install
 - To commit in vscode:
 - :wq
+- remember to run npm install after cloning!
