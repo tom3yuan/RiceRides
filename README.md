@@ -57,3 +57,4 @@ Comments by Tom:
 - To commit in vscode:
 - :wq
 - remember to run npm install after cloning!
+- npx expo start -> i
