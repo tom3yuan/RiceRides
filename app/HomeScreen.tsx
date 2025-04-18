@@ -6,7 +6,7 @@ import {
 } from '@react-native-google-signin/google-signin'
 import Geolocation from '@react-native-community/geolocation';
 
-import MapView from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 
 
 let currentPosition;
@@ -41,7 +41,7 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
     return (
         <View style={styles.container}>
             <View className="absolute top-16 left-10 m-4 justify-center">
-                <Text className="text-4xl text-lg font-bold">Welcome Back!</Text>
+                <Text className="text-4xl text-lg font-bold">Welcome Back, {GoogleSignin.getCurrentUser()["user"]["email"]}</Text>
             </View>
             <MapView
                 style={styles.map}
@@ -52,7 +52,11 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
                     longitudeDelta: 0.0421,
                 }}
                 showsUserLocation = {true}
-            />
+            >
+                <Marker
+                    coordinate = {{latitude: 37.34, longitude: -122.1}}
+                />
+            </MapView>
             <Button
                 title="check current"
                 onPress={update}

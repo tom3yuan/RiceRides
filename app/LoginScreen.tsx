@@ -21,7 +21,7 @@ export default function App({ navigation }: { navigation: any }) {
   const handleTapOutside = () => {
     Keyboard.dismiss()
   }
-  
+
   const check = async () => {
     Geolocation.requestAuthorization()
     Geolocation.getCurrentPosition(info => console.log(info));
@@ -33,10 +33,15 @@ export default function App({ navigation }: { navigation: any }) {
       await GoogleSignin.hasPlayServices();
       const response = await GoogleSignin.signIn();
       if (isSuccessResponse(response)) {
-        setUserInfo(response);
-        console.log("teemov")
-        console.log(userInfo.data?.user.email)
-        console.log(GoogleSignin.getCurrentUser())
+        if (!response.data?.user.email.toLowerCase().endsWith('@rice.edu')) {
+          GoogleSignin.signOut();
+        }
+        else {
+          await setUserInfo(response);
+          console.log(response)
+          console.log("User Info: ", response.data?.user.email)
+          navigation.navigate("Home", { name: "Home" })
+        }
       } else {
         // sign in was cancelled by user
       }
@@ -70,54 +75,42 @@ export default function App({ navigation }: { navigation: any }) {
       <View style={styles.icon}>
 
 
-        <Image source={require('../assets/images/Screenshot 2024-11-17 200241.png')} />
+        <Image source={require('../assets/images/Logo.png')} style={styles.logo} />
       </View>
 
       <Text style={styles.title}
         numberOfLines={1}>
         Login
       </Text>
-      <TextInput
-        style={styles.textbox}
-        placeholder="email"
-        inputMode="email"
-        keyboardType="default"
-      />
-      <TextInput
-        style={styles.textbox}
-        placeholder="password"
-        keyboardType="default"
-      />
 
-      {/*}<View className="flex-1 bg-gray-200 justify-center items-center">
-          <Text className="text-lg font-bold text-blue-500">Hello NativeWind!</Text>
-        </View>{*/}
-      <View
-        style={styles.passwordContainer}>
-        <TouchableOpacity
-          style={styles.passwordButton}
-        >
+      <TouchableOpacity onPress={signIn} style={styles.loginButtons}>
+        <Image source={require('../assets/images/google.png')} style={styles.google} />
+        <Text style={{fontFamily: "Helvetica", fontSize: 16,}}>Sign in with Google</Text>
 
-          <Text>
-            Forgot Password?
-          </Text>
-        </TouchableOpacity>
-      </View>
-
-
-      <Button
-        title="Go to Profile"
-        onPress={() =>
-          navigation.navigate("Home", { name: "Home" })
-        }
-      />
-      <Button
-        title="login"
-        onPress={signIn}
-      />
+      </TouchableOpacity>
       <Button
         title="check current"
         onPress={check}
+      />
+      <Button
+        title="Go to Profile"
+        onPress={() => {
+          if (userInfo.data?.user.email.toLowerCase().endsWith('@rice.edu')) {
+            navigation.navigate("Home", { name: "Home" })
+            }
+          else {
+            alert("Please use your Rice email to login")
+            GoogleSignin.signOut();
+            }
+          }
+        }
+      />
+      <Button
+        title="sign out"
+        onPress={() => {
+          GoogleSignin.signOut();
+          }
+        }
       />
     </View>
   );
@@ -130,7 +123,7 @@ const styles = StyleSheet.create({ //colors to make views more clear during codi
   },
   container: {
     flex: 1,
-    backgroundColor: '#FFC0CB',
+    backgroundColor: '#FFFFFF',
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: -100
@@ -145,14 +138,23 @@ const styles = StyleSheet.create({ //colors to make views more clear during codi
     fontWeight: 'bold',
     fontSize: 30, //download react library responsive font size later...
     paddingVertical: 50,
-    backgroundColor: "#34ebab"
+    backgroundColor: "#FFFFFF"
   },
   icon: { //make sure it is transparent
     width: 150,
     height: 150,
-    backgroundColor: "#008000",
+    backgroundColor: "#FFFFFF",
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  logo: {
+    width: 150,
+    height: 150,
+  },
+  google: {
+    width: 25,
+    height: 25,
+    marginRight: 10,
   },
   textbox: {
     height: 40,
@@ -173,16 +175,21 @@ const styles = StyleSheet.create({ //colors to make views more clear during codi
     justifyContent: "center",
     borderRadius: 10
   },
+  signInText: {
+    height: 34,
+    backgroundColor: "#FF1111",
+  },
   loginButtons: {
     marginTop: 50,
-    padding: 10,
-    margin: 12,
-    backgroundColor: "#ebeb34",
+    backgroundColor: "#FFFFFF",
+    borderWidth: 3,
+    borderColor: "#458dcc",
     height: 40,
     width: 300,
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 10
+    borderRadius: 20,
+    flexDirection: "row",
   },
   passwordButton: {
     padding: 2,
