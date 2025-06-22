@@ -35,12 +35,16 @@ export default function App({ navigation }: { navigation: any }) {
       if (isSuccessResponse(response)) {
         if (!response.data?.user.email.toLowerCase().endsWith('@rice.edu')) {
           GoogleSignin.signOut();
+          alert("Please use your Rice email to login")
         }
         else {
           await setUserInfo(response);
           console.log(response)
           console.log("User Info: ", response.data?.user.email)
-          navigation.navigate("Home", { name: "Home" })
+          navigation.navigate("Main", {
+            screen: "Home",
+            params: {/* any params */ }
+          });
         }
       } else {
         // sign in was cancelled by user
@@ -85,7 +89,7 @@ export default function App({ navigation }: { navigation: any }) {
 
       <TouchableOpacity onPress={signIn} style={styles.loginButtons}>
         <Image source={require('../assets/images/google.png')} style={styles.google} />
-        <Text style={{fontFamily: "Helvetica", fontSize: 16,}}>Sign in with Google</Text>
+        <Text style={{ fontFamily: "Helvetica", fontSize: 16, }}>Sign in with Google</Text>
 
       </TouchableOpacity>
       <Button
@@ -97,19 +101,19 @@ export default function App({ navigation }: { navigation: any }) {
         onPress={() => {
           if (userInfo.data?.user.email.toLowerCase().endsWith('@rice.edu')) {
             navigation.navigate("Home", { name: "Home" })
-            }
+          }
           else {
             alert("Please use your Rice email to login")
             GoogleSignin.signOut();
-            }
           }
+        }
         }
       />
       <Button
         title="sign out"
         onPress={() => {
           GoogleSignin.signOut();
-          }
+        }
         }
       />
     </View>

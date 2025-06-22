@@ -5,7 +5,6 @@ import {
     statusCodes,
 } from '@react-native-google-signin/google-signin'
 import Geolocation from '@react-native-community/geolocation';
-
 import MapView, { Marker } from 'react-native-maps';
 
 
@@ -19,6 +18,7 @@ Geolocation.getCurrentPosition(
         console.error("Error getting position:", error);
     }
 );
+
 
 
 
@@ -51,10 +51,10 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
                     latitudeDelta: 0.0922,
                     longitudeDelta: 0.0421,
                 }}
-                showsUserLocation = {true}
+                showsUserLocation={true}
             >
                 <Marker
-                    coordinate = {{latitude: 37.34, longitude: -122.1}}
+                    coordinate={{ latitude: 37.34, longitude: -122.1 }}
                 />
             </MapView>
             <Button
