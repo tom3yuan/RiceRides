@@ -15,6 +15,7 @@ export default function App() {
           options={{
             headerLeft: () => null,
             animation: "none",
+            headerBackVisible: true,
             //headerShown: false,
           }}
         />
@@ -23,6 +24,7 @@ export default function App() {
           component={HomeTabs}
           options={{
             animation: "none",
+            headerBackVisible: true,
             headerShown: false,
           }}
         />

@@ -23,14 +23,6 @@ export default function MapScreen({ navigation }: { navigation: any }) {
                     longitudeDelta: 0.0421,
                 }}
             />
-            <Button
-                title="sign out"
-                onPress={() => {
-                    GoogleSignin.signOut();
-                    navigation.navigate("Login", { name: "Login" })
-                }
-                }
-            />
         </View>
 
     );
