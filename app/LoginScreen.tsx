@@ -12,39 +12,35 @@ import {
 import Geolocation from '@react-native-community/geolocation';
 
 
-GoogleSignin.configure({
-  webClientId: '304317898382-3u48odn2ofkdu2rqmi48a0nee9kj8p58.apps.googleusercontent.com',
-});
-
 export default function App({ navigation }: { navigation: any }) {
 
   useEffect(() => {
-  const checkSignedInUser = async () => {
-    try {
-      const isSignedIn = await GoogleSignin.hasPreviousSignIn();
-      console.log("Is signed in:", isSignedIn);
-      console.log("Current user:", await GoogleSignin.getCurrentUser());
-      if (isSignedIn) {
-        await GoogleSignin.signInSilently();
-        const user = await GoogleSignin.getCurrentUser();
-        setUserInfo(user);
-        // Navigate if they're signed in with rice.edu
-        if (user?.user?.email.toLowerCase().endsWith('@rice.edu')) {
-          navigation.navigate("Main", {
-            screen: "Home",
-            params: {},
-          });
-        } else {
-          await GoogleSignin.signOut();
+    const checkSignedInUser = async () => {
+      try {
+        const isSignedIn = await GoogleSignin.hasPreviousSignIn();
+        console.log("Is signed in:", isSignedIn);
+        console.log("Current user:", await GoogleSignin.getCurrentUser());
+        if (isSignedIn) {
+          await GoogleSignin.signInSilently();
+          const user = await GoogleSignin.getCurrentUser();
+          setUserInfo(user);
+          // Navigate if they're signed in with rice.edu
+          if (user?.user?.email.toLowerCase().endsWith('@rice.edu')) {
+            navigation.navigate("Main", {
+              screen: "Home",
+              params: {},
+            });
+          } else {
+            await GoogleSignin.signOut();
+          }
         }
+      } catch (err) {
+        console.error("Error restoring sign-in:", err);
       }
-    } catch (err) {
-      console.error("Error restoring sign-in:", err);
-    }
-  };
+    };
 
-  checkSignedInUser();
-}, []);
+    checkSignedInUser();
+  }, []);
 
   const [{ width, height }, setSize] = useState({ width: 0, height: 0 });
   const [userInfo, setUserInfo] = useState(null);
