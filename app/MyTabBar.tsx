@@ -8,7 +8,7 @@ export default function MyTabBar({ state, descriptors, navigation }) {
   const middle = 2
 
   return (
-    <View style={{ flexDirection: 'row' }}>
+    <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
       {state.routes.map((route, index) => {
         {/*
         if (index === middle) {
@@ -50,13 +50,31 @@ export default function MyTabBar({ state, descriptors, navigation }) {
         };
         if (route.name === 'Rent') {
           return (
-            <Pressable
-              key={route.key}
-              accessibilityRole="button"
-              accessibilityState={isFocused ? { selected: true } : {}}
-              onPress={onPress}
-              style={{ flex: 1, padding: 20, alignItems: 'center', backgroundColor: "#6b8e7a" }}
-            ></Pressable>
+            <View
+              style={{
+                backgroundColor: '#6b8e7a',
+              }}
+            >
+              <Pressable
+                onPress={onPress}
+                style={({
+                  width: 50,
+                  height: 50,
+                  borderRadius: 30,
+                  backgroundColor: '#E5E6E1',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  marginTop: -25,
+                  marginLeft: 5,
+                  marginRight: 5,
+                })}
+              >
+                <Image
+                  source={require('../assets/images/cross.png')}
+                  style={{ width: 30, height: 30 }}
+                />
+              </Pressable>
+            </View>
           )
         }
 
@@ -66,18 +84,36 @@ export default function MyTabBar({ state, descriptors, navigation }) {
             accessibilityRole="button"
             accessibilityState={isFocused ? { selected: true } : {}}
             onPress={onPress}
-            style={{ flex: 1, padding: 20, alignItems: 'center', backgroundColor: "#6b8e7a" }}
+            style={{flex: route.name === 'Home' || route.name === 'Account' ? 5 : 3, paddingTop: 15, paddingBottom: 15, paddingLeft: route.name === 'Home' ? 11 : 0, paddingRight: route.name === 'Account' ? 11 : 0, alignItems: 'center', backgroundColor: "#6b8e7a" }}
+
+
           >
-            <View style={{ position: 'relative', width: 74, height: 32, justifyContent: 'center', alignItems: 'center', marginBottom: 6 }}>
-              <View style={[StyleSheet.absoluteFillObject, { top: -6, borderRadius: 32, backgroundColor: isFocused ? '#000000' : 'transparent' }]} />
+            <View style={{
+              position: 'relative',
+              height: 32,
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginBottom: 4,
+              paddingHorizontal: 6,
+            }}>
+              <View style={{
+                position: 'absolute',
+                top: -7,
+                width: 60,
+                height: 40,
+                borderRadius: 32,
+                backgroundColor: isFocused ? '#000000' : 'transparent',
+                zIndex: 2,
+              }} />
               <Image
-                source={icons[route.name]} // Replace with your image path
+                source={icons[route.name]}
                 style={{
                   width: route.name === 'Service' ? 30 : 25,
                   height: route.name === 'Service' ? 35 : 29,
                   marginBottom: 6,
-                  tintColor: isFocused ? '#6b8e7a' : '#000000', // Optional: tint image like an icon
-                  resizeMode: 'contain'
+                  tintColor: isFocused ? '#6b8e7a' : '#000000',
+                  resizeMode: 'contain',
+                  zIndex: 3,
                 }}
               />
             </View>

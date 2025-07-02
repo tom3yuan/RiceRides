@@ -2,6 +2,8 @@ import { useState } from "react"
 import { View, Button, Text, Image, StyleSheet, TextInput, TouchableWithoutFeedback, TouchableOpacity, Keyboard, Dimensions } from "react-native";
 import { useEffect } from "react";
 import firebase from '@react-native-firebase/app';
+import auth from '@react-native-firebase/auth';
+
 
 import "../global.css"
 
@@ -10,7 +12,14 @@ import {
   statusCodes,
 } from '@react-native-google-signin/google-signin'
 import Geolocation from '@react-native-community/geolocation';
+import Constants from 'expo-constants';
 
+const webClientId = Constants.expoConfig?.extra?.googleWebClientId;
+console.log("Web Client ID:", webClientId);
+
+GoogleSignin.configure({
+  webClientId,
+});
 
 export default function App({ navigation }: { navigation: any }) {
 
@@ -59,7 +68,9 @@ export default function App({ navigation }: { navigation: any }) {
 
   const signIn = async () => {
     try {
+      console.log("Attempting to sign in with Google");
       await GoogleSignin.hasPlayServices();
+      console.log("Attempting to sign in with Google");
       const response = await GoogleSignin.signIn();
       if (isSuccessResponse(response)) {
         if (!response.data?.user.email.toLowerCase().endsWith('@rice.edu')) {
