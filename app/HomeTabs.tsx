@@ -11,7 +11,7 @@ const Tab = createBottomTabNavigator();
 
 export default function HomeTabs() {
   return (
-    <Tab.Navigator tabBar={props => <MyTabBar {...props} />}>
+    <Tab.Navigator tabBar={props => <MyTabBar {...props} />} screenOptions={{ headerShown: false }}>
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Service" component={ServiceScreen} />
       <Tab.Screen name="Rent" component={RentScreen} />

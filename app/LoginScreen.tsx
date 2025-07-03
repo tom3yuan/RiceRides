@@ -2,7 +2,7 @@ import { useState } from "react"
 import { View, Button, Text, Image, StyleSheet, TextInput, TouchableWithoutFeedback, TouchableOpacity, Keyboard, Dimensions } from "react-native";
 import { useEffect } from "react";
 import firebase from '@react-native-firebase/app';
-import auth from '@react-native-firebase/auth';
+//import auth from '@react-native-firebase/auth';
 
 
 import "../global.css"

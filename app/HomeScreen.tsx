@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
+import { View, Text, Button, StyleSheet, Pressable, Image } from "react-native";
 import {
     GoogleSignin,
     statusCodes,
@@ -40,9 +40,26 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
 
     return (
         <View style={styles.container}>
-            <View className="absolute top-16 left-10 m-4 justify-center">
-                <Text className="text-4xl text-lg font-bold">Welcome Back, {GoogleSignin.getCurrentUser()["user"]["email"]}</Text>
+            <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'center', alignItems: 'center', borderColor: 'purple', borderWidth: 3, width: "100%" }}>
+                <Pressable
+                    onPress={update}
+                    style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#6b8e7a' }}>
+                </Pressable>
+                <Pressable
+                    onPress={update}
+                    style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#6b8e7a' }}>
+                </Pressable>
             </View>
+            <Pressable
+                onPress={update}
+                style={{ width: 343, height: 48, backgroundColor: '#6b8e7a', justifyContent: 'center', alignItems: 'center', borderRadius: 24 }}>
+                <Image
+                    source={require('../assets/images/Scan.png')}>
+                </Image>
+                <Text style={{ color: '#FFFFFF', fontSize: 16, fontWeight: 'bold' }}>
+                    Scan...
+                </Text>
+            </Pressable>
             <MapView
                 style={styles.map}
                 initialRegion={{

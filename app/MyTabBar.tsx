@@ -40,6 +40,7 @@ export default function MyTabBar({ state, descriptors, navigation }) {
             type: 'tabPress',
             target: route.key,
             canPreventDefault: true,
+            headerShown: false,
           });
 
 
@@ -84,9 +85,15 @@ export default function MyTabBar({ state, descriptors, navigation }) {
             accessibilityRole="button"
             accessibilityState={isFocused ? { selected: true } : {}}
             onPress={onPress}
-            style={{flex: route.name === 'Home' || route.name === 'Account' ? 5 : 3, paddingTop: 15, paddingBottom: 15, paddingLeft: route.name === 'Home' ? 11 : 0, paddingRight: route.name === 'Account' ? 11 : 0, alignItems: 'center', backgroundColor: "#6b8e7a" }}
-
-
+            style={{
+              flex: route.name === 'Home' || route.name === 'Account' ? 5 : 3,
+              paddingTop: 15,
+              paddingBottom: 15,
+              paddingLeft: route.name === 'Home' ? 11 : 0,
+              paddingRight: route.name === 'Account' ? 11 : 0,
+              alignItems: 'center',
+              backgroundColor: "#6b8e7a"
+            }}
           >
             <View style={{
               position: 'relative',
