@@ -52,6 +52,7 @@ export default function MyTabBar({ state, descriptors, navigation }) {
         if (route.name === 'Rent') {
           return (
             <View
+              key={route.key}
               style={{
                 backgroundColor: '#6b8e7a',
               }}
