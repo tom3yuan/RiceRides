@@ -43,6 +43,11 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
             <View className="absolute top-16 left-10 m-4 justify-center">
                 <Text className="text-4xl text-lg font-bold">Welcome Back, {GoogleSignin.getCurrentUser()["user"]["email"]}</Text>
             </View>
+            <View>
+                <Text>
+                    Hello
+                </Text>
+            </View>
             <MapView
                 style={styles.map}
                 initialRegion={{
