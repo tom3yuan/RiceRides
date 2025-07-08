@@ -9,7 +9,7 @@ ENV['EX_DEV_CLIENT_NETWORK_INSPECTOR'] = podfile_properties['EX_DEV_CLIENT_NETWO
 
 platform :ios, podfile_properties['ios.deploymentTarget'] || '15.1'
 
-use_modular_headers!
+#use_modular_headers!
 install! 'cocoapods',
   :deterministic_uuids => false
 
@@ -17,6 +17,9 @@ prepare_react_native_project!
 
 target 'ricerides' do
   #react native map dependencies
+
+  pod 'FirebaseCore', :modular_headers => true;
+  pod 'GoogleUtilities', :modular_headers => true;
   rn_maps_path = '../node_modules/react-native-maps'
   pod 'react-native-google-maps', :path => rn_maps_path
 
