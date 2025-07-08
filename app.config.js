@@ -4,6 +4,7 @@ export default {
   expo: {
     name: 'MyApp',
     slug: 'my-app',
+    owner: 'ricerides',
     extra: {
       googleWebClientId: process.env.GOOGLE_WEB_CLIENT_ID,
       eas: {

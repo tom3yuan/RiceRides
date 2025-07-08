@@ -3100,19 +3100,12 @@
   resolved "https://registry.npmjs.org/@react-native-community/geolocation/-/geolocation-3.4.0.tgz"
   integrity sha512-bzZH89/cwmpkPMKKveoC72C4JH0yF4St5Ceg/ZM9pA1SqX9MlRIrIrrOGZ/+yi++xAvFDiYfihtn9TvXWU9/rA==
 
-"@react-native-firebase/app@^22.2.1", "@react-native-firebase/app@22.2.1":
+"@react-native-firebase/app@^22.2.1":
   version "22.2.1"
   resolved "https://registry.npmjs.org/@react-native-firebase/app/-/app-22.2.1.tgz"
   integrity sha512-FNekjZgvLLBWLNMGKfKUHR4TTu8OY1YnvlQV9HaNboF5U5+CvTcK8IKycXKdhVP8YfcILTaM3AFraoQsQsy3/w==
   dependencies:
     firebase "11.3.1"
-
-"@react-native-firebase/auth@^22.2.1":
-  version "22.2.1"
-  resolved "https://registry.npmjs.org/@react-native-firebase/auth/-/auth-22.2.1.tgz"
-  integrity sha512-qy8TvT4MXmrR3d9xv7kAs7hBUVXo0n2u/rkaWK57TI8E4TmSlTwYiFOqabSlk9VjiHCYZtjpcWHeG1xwpzZ5ig==
-  dependencies:
-    plist "^3.1.0"
 
 "@react-native-google-signin/google-signin@^13.1.0":
   version "13.1.0"
@@ -8877,7 +8870,7 @@ pkg-dir@^4.2.0, pkg-dir@4.2.0:
   dependencies:
     find-up "^4.0.0"
 
-plist@^3.0.5, plist@^3.1.0:
+plist@^3.0.5:
   version "3.1.0"
   resolved "https://registry.npmjs.org/plist/-/plist-3.1.0.tgz"
   integrity sha512-uysumyrvkUX0rX/dEVqt8gC3sTBzd4zoWfLeS29nb53imdaXVvLINYXTI2GNqzaMuvacNx4uJQ8+b3zXR0pkgQ==
