@@ -7,7 +7,7 @@ import {
 import Geolocation from '@react-native-community/geolocation';
 import MapView, { Marker } from 'react-native-maps';
 import { db } from '../firebase';
-
+import { getAuth } from 'firebase/auth';
 
 let currentPosition;
 Geolocation.getCurrentPosition(
