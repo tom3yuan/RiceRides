@@ -15,7 +15,7 @@ import Geolocation from '@react-native-community/geolocation';
 import Constants from 'expo-constants';
 
 const webClientId = Constants.expoConfig?.extra?.googleWebClientId;
-console.log("Web Client ID:", webClientId);
+//console.log("Web Client ID:", webClientId);
 
 GoogleSignin.configure({
   webClientId,
@@ -27,8 +27,8 @@ export default function App({ navigation }: { navigation: any }) {
     const checkSignedInUser = async () => {
       try {
         const isSignedIn = await GoogleSignin.hasPreviousSignIn();
-        console.log("Is signed in:", isSignedIn);
-        console.log("Current user:", await GoogleSignin.getCurrentUser());
+        //console.log("Is signed in:", isSignedIn);
+        //console.log("Current user:", await GoogleSignin.getCurrentUser());
         if (isSignedIn) {
           await GoogleSignin.signInSilently();
           const user = await GoogleSignin.getCurrentUser();
@@ -68,7 +68,7 @@ export default function App({ navigation }: { navigation: any }) {
 
   const signIn = async () => {
     try {
-      console.log("Attempting to sign in with Google");
+      //console.log("Attempting to sign in with Google");
       await GoogleSignin.hasPlayServices();
       console.log("Attempting to sign in with Google");
       const response = await GoogleSignin.signIn();
@@ -79,8 +79,8 @@ export default function App({ navigation }: { navigation: any }) {
         }
         else {
           await setUserInfo(response);
-          console.log(response)
-          console.log("User Info: ", response.data?.user.email)
+          //console.log(response)
+          //console.log("User Info: ", response.data?.user.email)
           navigation.navigate("Main", {
             screen: "Home",
             params: {/* any params */ }

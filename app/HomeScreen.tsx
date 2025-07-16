@@ -6,6 +6,7 @@ import {
 } from '@react-native-google-signin/google-signin'
 import Geolocation from '@react-native-community/geolocation';
 import MapView, { Marker } from 'react-native-maps';
+import { db } from '../firebase';
 
 
 let currentPosition;
@@ -18,10 +19,6 @@ Geolocation.getCurrentPosition(
         console.error("Error getting position:", error);
     }
 );
-
-
-
-
 
 const HomeScreen = ({ navigation }: { navigation: any }) => {
 
