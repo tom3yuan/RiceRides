@@ -2,7 +2,7 @@ import * as React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from "./LoginScreen";
 import HomeTabs from "./HomeTabs";
-// remove HomeScreen and MapScreen from here, since they're now in HomeTabs
+import PersonalScreen from "./PersonalScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +23,12 @@ export default function App() {
             animation: "none",
           }}
         />
+        <Stack.Screen
+          name="Personal"
+          component={PersonalScreen}
+          options={{
+            animation: "none",
+          }}/>
       </Stack.Navigator>
   );
 }

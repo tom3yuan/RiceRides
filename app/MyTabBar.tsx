@@ -32,7 +32,8 @@ export default function MyTabBar({ state, descriptors, navigation }) {
           Account: require('../assets/images/account.png'),
         };
 
-        const isFocused = state.index === index;
+        const currentRouteName = state.routes[state.index].name;
+        const isFocused = route.name === currentRouteName || (route.name === 'Home' && currentRouteName === 'Personal');
 
 
         const onPress = () => {
@@ -79,7 +80,9 @@ export default function MyTabBar({ state, descriptors, navigation }) {
             </View>
           )
         }
-
+        if (route.name === 'Personal') {
+          return null;
+        }
         return (
           <Pressable
             key={route.key}

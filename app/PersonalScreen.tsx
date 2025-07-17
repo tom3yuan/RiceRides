@@ -39,7 +39,7 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
         console.log(selected)
     }
 
-    const [selected, setSelected] = useState('Public');
+    const [selected, setSelected] = useState('Personal');
 
     return (
         <View style={styles.container}>
@@ -49,7 +49,16 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
             <View style={{ position: 'absolute', top: '7%', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '100%', height: '7%' }}>
                 <Pressable
                     //change function below
-                    //no function for now
+                    onPress={() =>
+                        navigation.navigate("Main", {
+                            screen: "Home",
+                            params: {
+                                // any params
+                            },
+                        },
+                            console.log("Navigating to Home")
+                        )
+                    }
                     style={{ flex: 1, backgroundColor: '#6B8E7A', height: '100%', justifyContent: 'center', alignItems: 'center' }}>
 
                     {selected === 'Public' && <View style={{ borderRadius: 25, backgroundColor: '#000000', paddingVertical: 5, paddingHorizontal: 10, zIndex: 1, justifyContent: 'center', alignItems: 'center' }} >
@@ -67,16 +76,7 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
                 <View style={{ width: 1, backgroundColor: '#FFFFFF' }}></View>
                 <Pressable
                     //change function below
-                    onPress={() =>
-                        navigation.navigate("Personal", {
-                            screen: "Personal",
-                            params: {
-                                // any params
-                            },
-                        },
-                            console.log("Navigating to Home")
-                        )
-                    }
+                    //no function for now
                     style={{ flex: 1, backgroundColor: '#6B8E7A', height: '100%', justifyContent: 'center', alignItems: 'center' }}>
                     {selected === 'Personal' && <View style={{ borderRadius: 25, backgroundColor: '#000000', paddingVertical: 5, paddingHorizontal: 10, zIndex: 1, justifyContent: 'center', alignItems: 'center' }} >
                         <Text
@@ -95,85 +95,84 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
                 onPress={update}
                 style={{ flexDirection: 'row', width: '87%', height: 0.056338 * height, backgroundColor: 'rgba(107, 142, 122, 0.5)', alignItems: 'center', borderRadius: 24, marginBottom: '7%' }}>
                 <Image
-                    source={require('../assets/images/scan.png')}
+                    source={require('../assets/images/glass.png')}
                     style={{ marginRight: '3%', marginLeft: '5%', width: 0.061 * width, height: 0.0282 * height, }}
                 />
                 <Text style={{ color: '#757575', fontSize: 12, }}>
-                    Scan...
+                    Search...
                 </Text>
             </Pressable>
-            <MapView
-                style={styles.map}
-                initialRegion={{
-                    latitude: currentPosition.coords.latitude,
-                    longitude: currentPosition.coords.longitude,
-                    latitudeDelta: 0.0922,
-                    longitudeDelta: 0.0421,
-                }}
-                showsUserLocation={true}
-            >
-                <Marker
-                    coordinate={{ latitude: 37.34, longitude: -122.1 }}
-                />
-            </MapView>
-            <Pressable
-                onPress={update}
-                style={{ flexDirection: 'row', width: '87%', height: 0.056338 * height, backgroundColor: '#6B8E7A', alignItems: 'center', borderRadius: 10, marginBottom: '7%' }}>
-                <Image
-                    source={require('../assets/images/ongoing.png')}
-                    style={{ marginRight: '3%', marginLeft: '5%', width: 0.061 * width, height: 0.0282 * height, }}
-                />
-                <Text style={{ color: '#000000', fontSize: 15, fontWeight: '600', flex: 1 }}>
-                    Ongoing Order...
+            <View style={{ width: '87%', height: 0.22 * height, marginBottom: '7%', justifyContent: 'flex-start', }}>
+                {/* may need to change font size */}
+                <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: '3%' }}>
+                    CLASSIFICATION...
                 </Text>
-                <Image
-                    source={require('../assets/images/arrow.png')}
-                    style={{ marginRight: '13%', width: 0.025 * width, height: 0.021 * height }}
-                />
-            </Pressable>
-            <View style={{ backgroundColor: '#757575', width: '87%', height: 1, marginBottom: '7%' }} />
-            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '87%', height: '20%' }}>
-                <View
-                    style={{ flex: 1, justifyContent: 'center', alignItems: 'center', height: '100%', marginRight: '5%', borderRadius: 8, overflow: 'hidden' }}>
-                    <View
-                        style={{ backgroundColor: 'rgba(107, 142, 122, 0.3)', height: '40%', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
-                        <Image
-                            source={require('../assets/images/gift.png')}
-                            style={{ width: 0.07 * width, height: 0.031 * height }}
-                        />
+                <View style={{ width: '100%', height: 1, marginBottom: '5%', backgroundColor: '#000000' }} />
 
+                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '100%', height: '75%' }}>
+                    <View
+                        style={{ flex: 1, justifyContent: 'center', alignItems: 'center', height: '100%', marginRight: '5%', borderRadius: 8, overflow: 'hidden', }}>
+                        <View
+                            style={{ backgroundColor: 'rgba(107, 142, 122, 0.3)', height: '70%', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
+                            <Image
+                                source={require('../assets/images/gift.png')}
+                                style={{ width: 0.07 * width, height: 0.031 * height }}
+                            />
+
+                        </View>
+                        <View
+                            style={{ backgroundColor: '#E5E6E1', height: '30%', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
+                            <Text
+                                style={{ textAlign: 'center', fontWeight: 'bold' }}>
+                                BIKES
+                            </Text>
+                        </View>
                     </View>
                     <View
-                        style={{ backgroundColor: '#E5E6E1', height: '60%', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
-                        <Text
-                            style={{ textAlign: 'center' }}>
-                            Cards{'\n'}
-                            &{'\n'}
-                            Coupons
-                        </Text>
+                        style={{ flex: 1, justifyContent: 'center', alignItems: 'center', height: '100%', marginRight: '5%', borderRadius: 8, overflow: 'hidden', }}>
+                        <View
+                            style={{ backgroundColor: 'rgba(107, 142, 122, 0.3)', height: '70%', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
+                            <Image
+                                source={require('../assets/images/gift.png')}
+                                style={{ width: 0.07 * width, height: 0.031 * height }}
+                            />
+
+                        </View>
+                        <View
+                            style={{ backgroundColor: '#E5E6E1', height: '30%', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
+                            <Text
+                                style={{ textAlign: 'center', fontWeight: 'bold' }}>
+                                SCOOTERS
+                            </Text>
+                        </View>
                     </View>
-                </View>
-                <View
-                    style={{ flex: 1, justifyContent: 'center', alignItems: 'center', height: '100%', marginLeft: '5%', borderRadius: 8, overflow: 'hidden' }}>
                     <View
-                        style={{ backgroundColor: 'rgba(107, 142, 122, 0.3)', height: '40%', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
-                        <Image
-                            source={require('../assets/images/heart.png')}
-                            style={{ width: 0.077 * width, height: 0.03 * height }}
-                        />
-                    </View>
-                    <View
-                        style={{ backgroundColor: '#E5E6E1', height: '60%', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
-                        <Text
-                            style={{ textAlign: 'center' }}>
-                            Feedback{'\n'}
-                            &{'\n'}
-                            Donations
-                        </Text>
+                        style={{ flex: 1, justifyContent: 'center', alignItems: 'center', height: '100%', borderRadius: 8, overflow: 'hidden', }}>
+                        <View
+                            style={{ backgroundColor: 'rgba(107, 142, 122, 0.3)', height: '70%', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
+                            <Image
+                                source={require('../assets/images/gift.png')}
+                                style={{ width: 0.07 * width, height: 0.031 * height }}
+                            />
+
+                        </View>
+                        <View
+                            style={{ backgroundColor: '#E5E6E1', height: '30%', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
+                            <Text
+                                style={{ textAlign: 'center', fontWeight: 'bold' }}>
+                                OTHERS
+                            </Text>
+                        </View>
                     </View>
                 </View>
             </View>
 
+            <View style={{ width: '87%', height: 0.3225 * height, marginBottom: '3%', justifyContent: 'flex-start' }}>
+                <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 10 }}>
+                    GUESS YOU LIKE...
+                </Text>
+                <View style={{ width: '100%', height: 1, marginBottom: '5%', backgroundColor: '#000000' }} />
+            </View>
         </View>
     );
 };
@@ -185,7 +184,6 @@ const styles = StyleSheet.create({
         marginTop: 0,
         paddingTop: 0,
         backgroundColor: '#FFFFFF',
-
     },
     map: {
         width: '87%', // Adjust as needed

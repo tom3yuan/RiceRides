@@ -6,6 +6,7 @@ import MyTabBar from './MyTabBar';
 import ServiceScreen from "./ServiceScreen";
 import AccountScreen from "./AccountScreen";
 import RentScreen from "./RentScreen";
+import PersonalScreen from "./PersonalScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -17,6 +18,13 @@ export default function HomeTabs() {
       <Tab.Screen name="Rent" component={RentScreen} />
       <Tab.Screen name="Order" component={OrderScreen} />
       <Tab.Screen name="Account" component={AccountScreen} />
+      <Tab.Screen
+        name="Personal"
+        component={PersonalScreen}
+        options={{
+          tabBarButton: () => null,
+        }}
+      />
     </Tab.Navigator>
   );
 }
