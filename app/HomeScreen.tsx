@@ -74,7 +74,7 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
                                 // any params
                             },
                         },
-                            console.log("Navigating to Home")
+                            console.log("Navigating to Personal")
                         )
                     }
                     style={{ flex: 1, backgroundColor: '#6B8E7A', height: '100%', justifyContent: 'center', alignItems: 'center' }}>

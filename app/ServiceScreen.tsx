@@ -7,7 +7,8 @@ import {
 import Geolocation from '@react-native-community/geolocation';
 import MapView, { Marker } from 'react-native-maps';
 import { db } from '../firebase';
-import { getDocs, collection } from 'firebase/firestore';
+import { getDocs, collection, onSnapshot } from 'firebase/firestore';
+
 
 
 
@@ -43,22 +44,20 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
     const [docs, setDocs] = useState([]);
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const querySnapshot = await getDocs(collection(db, 'Rides'));
-                const results = [];
-                querySnapshot.forEach(doc => {
-                    results.push({ id: doc.id, ...doc.data() });
-                });
-                setDocs(results);
-                console.log('Fetched docs:', results);
-            } catch (error) {
-                console.error('Error fetching docs:', error);
-            }
-        };
+    const unsubscribe = onSnapshot(collection(db, 'Rides'), (querySnapshot) => {
+        const results = [];
+        querySnapshot.forEach((doc) => {
+            results.push({ id: doc.id, ...doc.data() });
+        });
+        setDocs(results);
+        console.log('Realtime update:', results);
+    }, (error) => {
+        console.error('Error listening to realtime updates:', error);
+    });
 
-        fetchData();
-    }, []); // Runs once on mount
+    // Cleanup listener on unmount
+    return () => unsubscribe();
+}, []);
     return (
         <View>
       {docs.length > 0 ? (

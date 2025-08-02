@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { View, Text, Button, StyleSheet, Pressable, Image, useWindowDimensions, } from "react-native";
+import React, { useState, useEffect } from "react";
+import { ScrollView, View, Text, Button, StyleSheet, Pressable, Image, useWindowDimensions, FlatList } from "react-native";
 import {
     GoogleSignin,
     statusCodes,
@@ -8,6 +8,7 @@ import Geolocation from '@react-native-community/geolocation';
 import MapView, { Marker } from 'react-native-maps';
 import { db } from '../firebase';
 import { getAuth } from 'firebase/auth';
+import { collection, onSnapshot } from 'firebase/firestore';
 
 let currentPosition;
 Geolocation.getCurrentPosition(
@@ -21,7 +22,7 @@ Geolocation.getCurrentPosition(
 );
 
 const HomeScreen = ({ navigation }: { navigation: any }) => {
-
+    const [docs, setDocs] = useState([]);
     const { width, height } = useWindowDimensions();
     const check = async () => {
         console.log(GoogleSignin.getCurrentUser())
@@ -40,6 +41,20 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
     }
 
     const [selected, setSelected] = useState('Personal');
+
+    useEffect(() => {
+        const unsubscribe = onSnapshot(collection(db, 'Rides'), (querySnapshot) => {
+            const results = [];
+            querySnapshot.forEach((doc) => {
+                results.push({ id: doc.id, ...doc.data() });
+            });
+            setDocs(results); // triggers UI update
+        }, (error) => {
+            console.error('Error with Firestore listener:', error);
+        });
+
+        return () => unsubscribe(); // clean up listener on unmount
+    }, []);
 
     return (
         <View style={styles.container}>
@@ -115,7 +130,7 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
                         <View
                             style={{ backgroundColor: 'rgba(107, 142, 122, 0.3)', height: '70%', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
                             <Image
-                                source={require('../assets/images/gift.png')}
+                                source={require('../assets/images/bike.jpg')}
                                 style={{ width: 0.07 * width, height: 0.031 * height }}
                             />
 
@@ -133,7 +148,7 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
                         <View
                             style={{ backgroundColor: 'rgba(107, 142, 122, 0.3)', height: '70%', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
                             <Image
-                                source={require('../assets/images/gift.png')}
+                                source={require('../assets/images/scooter.jpg')}
                                 style={{ width: 0.07 * width, height: 0.031 * height }}
                             />
 
@@ -151,7 +166,7 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
                         <View
                             style={{ backgroundColor: 'rgba(107, 142, 122, 0.3)', height: '70%', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
                             <Image
-                                source={require('../assets/images/gift.png')}
+                                source={require('../assets/images/electrical_bike.jpg')}
                                 style={{ width: 0.07 * width, height: 0.031 * height }}
                             />
 
@@ -172,6 +187,33 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
                     GUESS YOU LIKE...
                 </Text>
                 <View style={{ width: '100%', height: 1, marginBottom: '5%', backgroundColor: '#000000' }} />
+                <View style={{ width: '100%', }}>
+                    <ScrollView
+                        contentContainerStyle={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', padding: 10, }}
+                    >
+                        {docs.map((item) => (
+                            <View
+                                key={item.id}
+                                style={{
+                                    backgroundColor: '#f2f2f2',
+                                    borderRadius: 10,
+                                    padding: 15,
+                                    marginBottom: 10,
+                                    elevation: 3, // Android shadow
+                                    shadowColor: '#000',
+                                    shadowOffset: { width: 0, height: 2 },
+                                    shadowOpacity: 0.1,
+                                    shadowRadius: 4,
+                                }}
+                            >
+                                <Text style={{ fontWeight: 'bold', marginBottom: 5 }}>
+                                    {item.title || 'Untitled Ride'}
+                                </Text>
+                                <Text>{item.Description || 'No description'}</Text>
+                            </View>
+                        ))}
+                    </ScrollView>
+                </View>
             </View>
         </View>
     );
