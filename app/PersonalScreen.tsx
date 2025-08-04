@@ -189,27 +189,33 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
                 <View style={{ width: '100%', height: 1, marginBottom: '5%', backgroundColor: '#000000' }} />
                 <View style={{ width: '100%', }}>
                     <ScrollView
-                        contentContainerStyle={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', padding: 10, }}
+                        contentContainerStyle={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' }}
                     >
-                        {docs.map((item) => (
-                            <View
-                                key={item.id}
-                                style={{
-                                    backgroundColor: '#f2f2f2',
-                                    borderRadius: 10,
-                                    padding: 15,
-                                    marginBottom: 10,
-                                    elevation: 3, // Android shadow
-                                    shadowColor: '#000',
-                                    shadowOffset: { width: 0, height: 2 },
-                                    shadowOpacity: 0.1,
-                                    shadowRadius: 4,
-                                }}
-                            >
-                                <Text style={{ fontWeight: 'bold', marginBottom: 5 }}>
-                                    {item.title || 'Untitled Ride'}
-                                </Text>
-                                <Text>{item.Description || 'No description'}</Text>
+                        {docs.filter((item) => item.Available).map((item) => (
+                            <View key={item.id} style={styles.container1}>
+                                <Image
+                                    source={{
+                                        uri: 'https://images.unsplash.com/photo-1449426468159-d96dbf08f19f?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bW90b3JiaWtlfGVufDB8fDB8fHww',
+                                    }}
+                                    style={styles.image}
+                                    resizeMode="cover"
+                                />
+                                <View style={styles.card}>
+                                    <View style={styles.headerContainer}>
+                                        <Text style={styles.header}>{item.title}</Text>
+                                        <Text style={styles.price}>{"$" + item.Rate}</Text>
+                                    </View>
+                                    <Text style={styles.description} numberOfLines={3}>
+                                        {item.Description}
+                                    </Text>
+                                    <View style={styles.userContainer}>
+                                        <Image
+                                            source={{ uri: 'https://example.com/user-avatar.jpg' }}
+                                            style={styles.avatar}
+                                        />
+                                        <Text style={styles.username}>{item.owner_name}</Text>
+                                    </View>
+                                </View>
                             </View>
                         ))}
                     </ScrollView>
@@ -232,6 +238,54 @@ const styles = StyleSheet.create({
         height: '28%',
         borderRadius: 10,
         marginBottom: '7%'
+    },
+    container1: {
+        width: '48%',
+        marginVertical: 10,
+        borderRadius: 10,
+    },
+    image: {
+        width: '100%',
+        height: 120, 
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+    },
+    card: {
+        backgroundColor: '#E5E6E1',
+        padding: 10,
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
+    },
+    headerContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    header: {
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+    price: {
+        fontSize: 14,
+        color: '#666',
+    },
+    description: {
+        fontSize: 12,
+        color: '#666',
+        marginVertical: 5,
+    },
+    userContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    avatar: {
+        width: 20,
+        height: 20,
+        borderRadius: 10,
+    },
+    username: {
+        fontSize: 12,
+        marginLeft: 5,
     },
 })
 export default HomeScreen;
