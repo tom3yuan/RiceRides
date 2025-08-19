@@ -39,6 +39,12 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
     }
 
 const { width , height } = useWindowDimensions();
+const onOrderPress = () => {
+    navigation.navigate('OrderDetails');
+  };
+//   const onOrderPress = (orderId) => {
+//     navigation.navigate('OrderDetails', { orderId });
+//   };
 
 // Testing Cases -> change to firebase later
 // Note that orderNumber must be UNIQUE !!
@@ -103,7 +109,7 @@ const [orders, setOrders] = useState([
             keyExtractor={(item) => item.orderNumber} //avoid bug when re-ordering happens
             renderItem={({ item }) => (
                 <Pressable style={[styles.completedText, styles.titleBottomLine]}>
-                    <Pressable style={{...styles.ordersButtonText,height: 0.07042254 * height}}>
+                    <Pressable onPress={onOrderPress} style={{...styles.ordersButtonText,height: 0.07042254 * height}}>
                     {/*sample image*/}
                     {/*need to standardize the shape of the input images*/}
                     <Image

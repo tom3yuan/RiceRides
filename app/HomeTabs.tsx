@@ -1,7 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './HomeScreen';
-import OrderScreen from './OrderScreen';
+import OrdersStack from './OrdersStack';
 import MyTabBar from './MyTabBar';
 import ServiceScreen from "./ServiceScreen";
 import AccountScreen from "./AccountScreen";
@@ -16,7 +16,7 @@ export default function HomeTabs() {
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Service" component={ServiceScreen} />
       <Tab.Screen name="Rent" component={RentScreen} />
-      <Tab.Screen name="Order" component={OrderScreen} />
+      <Tab.Screen name="Order" component={OrdersStack} />
       <Tab.Screen name="Account" component={AccountScreen} />
       <Tab.Screen
         name="Personal"

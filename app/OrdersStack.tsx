@@ -7,7 +7,7 @@ const Stack = createNativeStackNavigator();
 
 export default function OrdersStack() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator initialRouteName="Orders" screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Orders" component={OrderScreen} />
       <Stack.Screen name="OrderDetails" component={OrderDetailsScreen} />
     </Stack.Navigator>
